@@ -6,11 +6,15 @@ import {
   Image,
   ImageBackground,
   Animated,
+  SafeAreaView,
+  Pressable,
+
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
-
+import { ImagenDelDia } from './src/components/ImagenDelDia'
+import { Header } from './src/components/Header'
 export default function App() {
   const [loading, setLoading] = useState("");
   const moveAnim = new Animated.Value(-100); // Movimiento horizontal
@@ -66,12 +70,18 @@ export default function App() {
   });
 
   return (
-    <LinearGradient
-      colors={['#0000CD', '#00008B']} // Azul profundo en la parte superior y azul profundo ligeramente más claro en la parte inferior
+    <>
+      
+      <Header />
+      
+      <LinearGradient
+      colors={["#0000CD", "#00008B"]} // Azul profundo en la parte superior y azul profundo ligeramente más claro en la parte inferior
       start={{ x: 0, y: 0 }}
       end={{ x: 0, y: 1 }}
       style={styles.container}
     >
+      
+      
       <ImageBackground source={image} style={styles.fondoImg} />
       <Animated.Image
         style={[
@@ -84,7 +94,7 @@ export default function App() {
             ],
           },
         ]}
-        source={require('./assets/cometa-fondo.png')}
+        source={require("./assets/cometa-fondo.png")}
       />
       <View style={styles.overlayContainer}>
         <BlurView intensity={30} style={styles.blurView}>
@@ -94,18 +104,8 @@ export default function App() {
         </BlurView>
 
         <Text>Loading: {loading}</Text>
-
-        <StatusBar style="auto" />
-        <View style={styles.containerImage}>
-          <Image
-            alt="imagenCodigo"
-            onLoadStart={() => setLoading("Cargando imagen")}
-            onLoadEnd={() => setLoading("Imagen cargada")}
-            fadeDuration={2000}
-            style={styles.imagenCodigo}
-            source={require("./assets/imagen-codigo.png")}
-          />
-        </View>
+        <ImagenDelDia />
+        
         <View style={styles.containerImage}>
           <Image
             alt="ImagenGalaxia"
@@ -118,9 +118,9 @@ export default function App() {
           />
         </View>
       </View>
-
-      
-    </LinearGradient>
+    </LinearGradient>  
+    </>
+    
   );
 }
 
@@ -129,6 +129,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+  },
+  blurView: {
+    height: 50,
+    borderRadius: 30,
   },
   fondoImg: {
     flex: 1,
@@ -153,7 +157,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     opacity: 1,
     zIndex: 1,
-    
   },
   imagenCodigo: {
     height: 210,
@@ -162,16 +165,20 @@ const styles = StyleSheet.create({
     borderWidth: 10,
     borderColor: "blue",
     borderStyle: "solid",
-
   },
   cometa: {
     position: "absolute",
     zIndex: 1,
     left: 0, // Comienza fuera de la pantalla a la izquierda
-    top: '50%', // Posición vertical en el medio de la pantalla
+    top: "50%", // Posición vertical en el medio de la pantalla
     width: 30,
     height: 30,
     zIndex: -1,
-  }
+  },
+  wrapperCustom: {
+    borderRadius: 8,
+    padding: 6,
+    width: 200,
+    height: 50,
+  },
 });
-
