@@ -23,9 +23,11 @@ export const LastFiveImages = () => {
         const todaysDate = format(date, "yyyy-MM-dd");
         const fiveDaysAgoDate = format(sub(date, { days: 5 }), "yyyy-MM-dd");
         // se obtiene un Array de objetos con las imagenes de los últimos 5 días
+        
         const data = await getAllImages(
           `&start_date=${fiveDaysAgoDate}&end_date=${todaysDate}`
         );
+
         if (data.data) {
           setDataNasa(data.data);
           setIsLoading(false);
