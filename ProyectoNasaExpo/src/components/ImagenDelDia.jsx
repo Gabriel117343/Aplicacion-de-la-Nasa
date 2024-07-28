@@ -1,10 +1,9 @@
 import { StyleSheet, Text, Image, Pressable, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import getAllImages from "../api/nasaApi";
-
+import { VideoDelDia } from './VideoDelDia'
 import BlurredImageWithLoading from "../ui/BlurredImageWithLoading";
 export const ImagenDelDia = () => {
-
   const [dataNasa, setDataNasa] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -16,7 +15,6 @@ export const ImagenDelDia = () => {
           setDataNasa(data.data);
           setIsLoading(false);
         }
-        
       } catch (error) {
         console.log(error);
       }
@@ -25,6 +23,7 @@ export const ImagenDelDia = () => {
   }, []);
   // precarga de la imagen de la API de la NASA, si es que ya se obtuvo la data
   const imagenNasa = !isLoading ? dataNasa.url : null;
+  console.log(imagenNasa);
   return (
     <View style={styles.container}>
       <View style={styles.fondoContainer} />
@@ -32,11 +31,15 @@ export const ImagenDelDia = () => {
       <View style={styles.informacion}>
         <View style={styles.containerImg}>
           {imagenNasa ? (
-            <Image
-              fadeDuration={2000}
-              source={{ uri: dataNasa.url }}
-              style={styles.image}
-            />
+            dataNasa.media_type === "video" ? (
+              <VideoDelDia videoUrl={dataNasa.url}/>
+            ) : (
+              <Image
+                fadeDuration={2000}
+                source={{ uri: dataNasa.url }}
+                style={styles.image}
+              />
+            )
           ) : (
             <>
               <BlurredImageWithLoading />
@@ -44,7 +47,9 @@ export const ImagenDelDia = () => {
           )}
         </View>
         {}
-        <Text style={[styles.title, !!isLoading && { textAlign: 'center' }]}>{dataNasa.title ?? "Cargando..."}</Text>
+        <Text style={[styles.title, !!isLoading && { textAlign: "center" }]}>
+          {dataNasa.title ?? "Cargando..."}
+        </Text>
 
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text style={styles.date}>{dataNasa.date ?? "-"}</Text>
@@ -53,7 +58,7 @@ export const ImagenDelDia = () => {
             onPress={() => {}}
             style={({ pressed }) => [
               {
-                backgroundColor: pressed ? "red" : "blue",
+                backgroundColor: pressed ? "#1e70ff" : "#1e90ff",
                 borderRadius: 7,
                 padding: 8,
                 width: 80,
@@ -63,7 +68,7 @@ export const ImagenDelDia = () => {
           >
             {({ pressed }) => (
               <Text style={{ color: "white", textAlign: "center" }}>
-                {pressed ? "Soltar" : "Presionar"}
+                {pressed ? "Soltar" : "Ver"}
               </Text>
             )}
           </Pressable>
@@ -86,8 +91,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     justifyContent: "center",
-    
-    backgroundColor: '#0463c4',
+
+    backgroundColor: "#0463c4",
     borderRadius: 32,
     alignItems: "center",
     aspectRatio: "1/1",
@@ -108,7 +113,7 @@ const styles = StyleSheet.create({
     height: 190,
     opacity: 1,
     zIndex: 1,
-    borderWidth: 2,
+    borderWidth: 1.5,
     borderColor: "#fff",
     borderRadius: 32,
     overflow: "hidden",

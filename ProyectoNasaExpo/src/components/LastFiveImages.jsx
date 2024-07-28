@@ -6,6 +6,7 @@ import {
   Image,
   Pressable,
   FlatList,
+  ScrollView,
 } from "react-native";
 
 import getAllImages from "../api/nasaApi";
@@ -23,13 +24,13 @@ export const LastFiveImages = () => {
         const todaysDate = format(date, "yyyy-MM-dd");
         const fiveDaysAgoDate = format(sub(date, { days: 5 }), "yyyy-MM-dd");
         // se obtiene un Array de objetos con las imagenes de los últimos 5 días
-        
+
         const data = await getAllImages(
           `&start_date=${fiveDaysAgoDate}&end_date=${todaysDate}`
         );
 
         if (data.data) {
-          setDataNasa(data.data);
+          setDataNasa(data.data.toReversed());
           setIsLoading(false);
         }
       } catch (error) {
@@ -37,69 +38,65 @@ export const LastFiveImages = () => {
       }
     }
     cargarData();
-  });
+  }, []);
+  console.log({ datos: dataNasa });
   return (
     <View style={styles.container}>
-      <View style={styles.fondoContainer} />
-      <FlatList>
-        data={dataNasa}
-        keyExtractor={(data) => item.date}
-        renderItem=
-        {({ item }) => (
-          <View style={styles.informacion}>
-            <Text style={styles.title}>{item.title}</Text>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "flex-end",
-              }}
-            >
-              <Text style={styles.date}>{item.date ?? "-"}</Text>
-
-              <Pressable
-                onPress={() => {}}
-                style={({ pressed }) => [
-                  {
-                    backgroundColor: pressed ? "red" : "blue",
-                    borderRadius: 7,
-                    padding: 8,
-                    width: 80,
-                  },
-                  styles.wrapperCustom,
-                ]}
+      {isLoading ? (
+        <Text style={{ color: "white", textAlign: "center" }}>Cargando...</Text>
+      ) : (
+        <FlatList
+          data={dataNasa}
+          keyExtractor={(item) => item.date}
+          renderItem={({ item }) => (
+            <View style={styles.informacion}>
+              <View
+                style={[styles.fondoContainer, StyleSheet.absoluteFillObject]}
+              />
+              <Text style={styles.title}>{item.title}</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "flex-end",
+                }}
               >
-                {({ pressed }) => (
-                  <Text style={{ color: "white", textAlign: "center" }}>
-                    {pressed ? "Soltar" : "Presionar"}
-                  </Text>
-                )}
-              </Pressable>
+                <Text style={styles.date}>{item.date ?? "-"}</Text>
+                <Pressable
+                  onPress={() => {}}
+                  style={({ pressed }) => [
+                    {
+                      backgroundColor: pressed ? "#0056b3" : "#007bff",
+                      borderRadius: 7,
+                      padding: 8,
+                      width: 80,
+                    },
+                    styles.wrapperCustom,
+                  ]}
+                >
+                  {({ pressed }) => (
+                    <Text style={{ color: "white", textAlign: "center" }}>
+                      {pressed ? "Soltar" : "Ver"}
+                    </Text>
+                  )}
+                </Pressable>
+              </View>
             </View>
-          </View>
-        )}
-      </FlatList>
+          )}
+        />
+      )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    height: 110,
-
+    height: "100%",
+    flex: 1,
     borderRadius: 16,
     overflow: "hidden",
   },
-  fondoContainer: {
-    flex: 1,
 
-    backgroundColor: "#0463c4",
-    position: "relative",
-    opacity: 0.4,
-    borderRadius: 16,
-    zIndex: 0,
-  },
   title: {
     color: "white",
     fontSize: 17,
@@ -107,11 +104,18 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   informacion: {
-    position: "absolute",
+    marginTop: 10,
     width: "100%",
-    height: "100%",
+    height: 120,
     justifyContent: "space-between",
     padding: 15,
+  },
+  fondoContainer: {
+    flex: 1,
+    backgroundColor: "#034a93",
+    opacity: 0.6,
+    borderRadius: 16,
+    zIndex: -1,
   },
   date: {
     color: "#fff",
