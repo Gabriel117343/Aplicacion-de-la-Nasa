@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     height: "100%",
     justifyContent: "center",
 
-    backgroundColor: "#0463c4",
+    backgroundColor: "#7178df",
     borderRadius: 32,
     alignItems: "center",
     aspectRatio: "1/1",

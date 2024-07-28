@@ -66,7 +66,7 @@ export const LastFiveImages = () => {
                   onPress={() => {}}
                   style={({ pressed }) => [
                     {
-                      backgroundColor: pressed ? "#0056b3" : "#007bff",
+                      backgroundColor: pressed ? "#9ca2ef" : "#7178df",
                       borderRadius: 7,
                       padding: 8,
                       width: 80,
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
   },
   fondoContainer: {
     flex: 1,
-    backgroundColor: "#034a93",
-    opacity: 0.6,
+    backgroundColor: "#5a61bd",
+    opacity: 0.4,
     borderRadius: 16,
     zIndex: -1,
   },

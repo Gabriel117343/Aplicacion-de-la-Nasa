@@ -6,7 +6,7 @@ export const Header = () => {
     <View style={styles.container}>
       <LinearGradient
         // Background Linear Gradient
-        colors={["#2f2c79", "#302c9b"]}
+        colors={["#3f448C", "#6258df"]}
         start={{ x: 0.5, y: 1 }}
         end={{ x: 0.9, y: 0.2 }}
         style={{ flex: 1, flexDirection: "row", alignItems: "center" }}
