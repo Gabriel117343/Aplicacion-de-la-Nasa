@@ -2,15 +2,16 @@ import { StyleSheet, Text, Image, Pressable, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import getAllImages from "../api/nasaApi";
 
-import BlurredImageWithLoading from "./BlurredImageWithLoading";
+import BlurredImageWithLoading from "../ui/BlurredImageWithLoading";
 export const ImagenDelDia = () => {
+
   const [dataNasa, setDataNasa] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     async function cargarData() {
       try {
-        // Código para cargar la imagen
         const data = await getAllImages();
+        // en caso de que se haya obtenido la data de la API se setea el estado
         if (data.data) {
           setDataNasa(data.data);
           setIsLoading(false);
@@ -22,6 +23,7 @@ export const ImagenDelDia = () => {
     }
     cargarData();
   }, []);
+  // precarga de la imagen de la API de la NASA, si es que ya se obtuvo la data
   const imagenNasa = !isLoading ? dataNasa.url : null;
   return (
     <View style={styles.container}>
@@ -84,12 +86,13 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     justifyContent: "center",
-    backgroundColor: "#0000CD",
+    
+    backgroundColor: '#0463c4',
     borderRadius: 32,
     alignItems: "center",
     aspectRatio: "1/1",
     resizeMode: "contain",
-    opacity: 0.4,
+    opacity: 0.6,
     zIndex: 0,
     borderColor: "white",
     borderWidth: 0.7,

@@ -2,7 +2,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   ImageBackground,
   Animated,
 } from "react-native";
@@ -10,11 +9,12 @@ import React, { useState, useEffect } from "react";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import { ImagenDelDia } from "./ImagenDelDia";
+import { LastFiveImages } from './LastFiveImages'
 import { Header } from "./Header";
 import { useSafeAreaInsets } from "react-native-safe-area-context"; // utilidad para obtener los margenes seguros del dispositivo
 
 export default function Main() {
-  const [loading, setLoading] = useState("");
+
   const moveAnim = new Animated.Value(-100); // Movimiento horizontal
   const verticalAnim = new Animated.Value(0); // Movimiento vertical
   const rotateAnim = new Animated.Value(0); // Rotación
@@ -104,18 +104,11 @@ export default function Main() {
           </BlurView>
 
           <ImagenDelDia />
-
-          <View style={styles.containerImage}>
-            <Image
-              alt="ImagenGalaxia"
-              fadeDuration={2000}
-              style={styles.imagenCodigo}
-              testID="imagenGalaxia"
-              source={{
-                uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0nDxLmFXEhxBFJSuE4OY6XAz7U3xXU2bF2Q&s",
-              }}
-            />
-          </View>
+          <Text style={{color: 'white', opacity: 0.8, marginVertical: 6, fontSize: 18, alignSelf: 'flex-start' }}>
+            Últimos 5 días
+          </Text>
+          <LastFiveImages />
+          
         </View>
       </LinearGradient>
     </View>
@@ -158,7 +151,7 @@ const styles = StyleSheet.create({
   overlayContainer: {
     flex: 1,
     justifyContent: "top",
-    alignItems: "center",
+    // alignItems: "center",
     zIndex: 2, // Contenido sobre el fondo
   },
   containerImage: {
@@ -166,14 +159,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     opacity: 1,
     zIndex: 2,
-  },
-  imagenCodigo: {
-    height: 210,
-    aspectRatio: "5/3",
-    resizeMode: "cover",
-    borderWidth: 10,
-    borderColor: "blue",
-    borderStyle: "solid",
   },
   cometa: {
     position: "absolute",
@@ -184,10 +169,5 @@ const styles = StyleSheet.create({
     height: 30,
     zIndex: 1,
   },
-  wrapperCustom: {
-    borderRadius: 8,
-    padding: 6,
-    width: 200,
-    height: 50,
-  },
+
 });
