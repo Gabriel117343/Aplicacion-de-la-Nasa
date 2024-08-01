@@ -31,7 +31,7 @@ export const CardFiveImages = ({ data }) => {
           onPress={() => {}}
           style={({ pressed }) => [
             {
-              backgroundColor: pressed ? "#9ca2ef" : "#7178df",
+              backgroundColor: pressed ? "#8a91e6" : "#7178df",
               borderRadius: 7,
               padding: 8,
               width: 80,
@@ -40,7 +40,7 @@ export const CardFiveImages = ({ data }) => {
           ]}
         >
           {({ pressed }) => (
-            <Text style={{ color: "white", textAlign: "center" }}>
+            <Text style={{ color: "white", textAlign: "center", fontSize: 14 }}>
               {pressed ? "Soltar" : "Ver"}
             </Text>
           )}
@@ -83,7 +83,7 @@ export const AnimatedCardFiveImages = ({ data, index }) =>{
   useEffect(() => {
     Animated.timing(opacity, {
       toValue: 1,
-      duration: 1000,
+      duration: 500,
       delay: index * 250,
       useNativeDriver: true
     }).start()

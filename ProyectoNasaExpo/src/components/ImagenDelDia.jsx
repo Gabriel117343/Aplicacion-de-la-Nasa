@@ -58,7 +58,7 @@ export const ImagenDelDia = () => {
             onPress={() => {}}
             style={({ pressed }) => [
               {
-                backgroundColor: pressed ? "#1e70ff" : "#1e90ff",
+                backgroundColor: pressed ? "#63a4ff" : "#1e90ff",
                 borderRadius: 7,
                 padding: 8,
                 width: 80,
@@ -67,7 +67,7 @@ export const ImagenDelDia = () => {
             ]}
           >
             {({ pressed }) => (
-              <Text style={{ color: "white", textAlign: "center" }}>
+              <Text style={{ color: "white", textAlign: "center", fontWeight: 'bold', fontSize: 14 }}>
                 {pressed ? "Soltar" : "Ver"}
               </Text>
             )}

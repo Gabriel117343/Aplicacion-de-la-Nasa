@@ -3,70 +3,27 @@ import {
   Text,
   View,
   ImageBackground,
-  Animated,
+
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React  from "react";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import { ImagenDelDia } from "./ImagenDelDia";
 import { LastFiveImages } from './LastFiveImages'
 import { Header } from "./Header";
+import { Cometa } from './shared/Cometa';
+import { Satelite } from './shared/Satelite'
 import { useSafeAreaInsets } from "react-native-safe-area-context"; // utilidad para obtener los margenes seguros del dispositivo
 
 export default function Main() {
 
-  const moveAnim = new Animated.Value(-100); // Movimiento horizontal
-  const verticalAnim = new Animated.Value(0); // Movimiento vertical
-  const rotateAnim = new Animated.Value(0); // Rotación
 
   const insets = useSafeAreaInsets(); // margenes seguros del dispositivo
   const image = {
     uri: "https://www.ucf.edu/wp-content/blogs.dir/20/files/2021/08/UCF-Space-Exploration.jpg",
   };
 
-  useEffect(() => {
-    // Movimiento horizontal
-    const moveHorizontal = Animated.loop(
-      Animated.timing(moveAnim, {
-        toValue: 400, // Mueve a la derecha fuera de la pantalla
-        duration: 5000, // 5 segundos de duración
-        useNativeDriver: true,
-      })
-    );
-
-    // Movimiento vertical (simulando gravedad)
-    const moveVertical = Animated.loop(
-      Animated.sequence([
-        Animated.timing(verticalAnim, {
-          toValue: 500, // Caída
-          duration: 8000, // 8 segundos de caída
-          useNativeDriver: true,
-        }),
-        Animated.timing(verticalAnim, {
-          toValue: 0, // Regresa al punto inicial
-          duration: 8000, // 8 segundos de subida
-          useNativeDriver: true,
-        }),
-      ])
-    );
-
-    // Rotación continua
-    const rotate = Animated.loop(
-      Animated.timing(rotateAnim, {
-        toValue: 360,
-        duration: 3000, // 3 segundos para una rotación completa
-        useNativeDriver: true,
-      })
-    );
-
-    Animated.parallel([moveHorizontal, moveVertical, rotate]).start();
-  }, [moveAnim]);
-
-  // Interpolación para rotación
-  const rotateInterpolate = rotateAnim.interpolate({
-    inputRange: [0, 360],
-    outputRange: ["0deg", "360deg"],
-  });
+ 
   return (
     <View
       style={[
@@ -83,19 +40,8 @@ export default function Main() {
         style={styles.containerBackground}
       >
         <ImageBackground source={image} style={styles.fondoImg} />
-        <Animated.Image
-          style={[
-            styles.cometa,
-            {
-              transform: [
-                { translateX: moveAnim },
-                { translateY: verticalAnim },
-                { rotate: rotateInterpolate },
-              ],
-            },
-          ]}
-          source={require("../../assets/cometa-fondo.png")}
-        />
+        <Satelite />
+        <Cometa />
         <View style={styles.overlayContainer}>
           <BlurView intensity={30} style={styles.blurView}>
             <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>
@@ -159,15 +105,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     opacity: 1,
     zIndex: 2,
-  },
-  cometa: {
-    position: "absolute",
-
-    left: 0, // Comienza fuera de la pantalla a la izquierda
-    top: "50%", // Posición vertical en el medio de la pantalla
-    width: 30,
-    height: 30,
-    zIndex: 1,
   },
 
 });
