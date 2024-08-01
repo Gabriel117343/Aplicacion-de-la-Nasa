@@ -1,6 +1,6 @@
-**Aplicación de la NASA**
-- Esta aplicación realiza una petición a la Api de la nasa para poder obtener las ultims imagenes de la nasa más su información
-> Expo Framework
+## Aplicación de la NASA
+
+- Esta aplicación realiza una petición a la Api de la nasa para poder obtener las últimas imagenes de la nasa, con la información de cada una.
 
 ### Dependencies
 
