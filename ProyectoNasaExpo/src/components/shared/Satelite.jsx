@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         height: 100,
         position: 'absolute',
         top: '2%',
-        left: '5%',
+        left: '-5%',
         zIndex: 0,
         opacity: 0.7,
     },
