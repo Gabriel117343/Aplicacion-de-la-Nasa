@@ -33,5 +33,5 @@
 | @babel/core          | ^7.20.0  |
 | react-native-dotenv  | ^3.4.11  |
 | tailwindcss          | 3.3.2    |
-> [!ino
+> Imagen
 <img src="https://github.com/user-attachments/assets/4ef3db65-d12e-45e7-9ba6-980466c3e696" alt="NASA Image" width="25%" />
