@@ -1,11 +1,15 @@
 import { StyleSheet, Text, Image, Pressable, View } from "react-native";
 import React, { useEffect, useState } from "react";
+import { Link, useRouter } from "expo-router";
 import getAllImages from "../api/nasaApi";
-import { VideoDelDia } from './VideoDelDia'
+import { VideoDelDia } from "./VideoDelDia";
 import BlurredImageWithLoading from "../ui/BlurredImageWithLoading";
+import Fontisto from '@expo/vector-icons/Fontisto';
 export const ImagenDelDia = () => {
   const [dataNasa, setDataNasa] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const router = useRouter(); // hook para manejar la navegación
   useEffect(() => {
     async function cargarData() {
       try {
@@ -32,7 +36,7 @@ export const ImagenDelDia = () => {
         <View style={styles.containerImg}>
           {imagenNasa ? (
             dataNasa.media_type === "video" ? (
-              <VideoDelDia videoUrl={dataNasa.url}/>
+              <VideoDelDia videoUrl={dataNasa.url} />
             ) : (
               <Image
                 fadeDuration={2000}
@@ -52,26 +56,43 @@ export const ImagenDelDia = () => {
         </Text>
 
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text style={styles.date}>{dataNasa.date ?? "-"}</Text>
+          <View style={{ flexDirection: "row", gap: 8 }}>
+            <Fontisto name="date" size={17} color="white" />
+            <Text style={styles.date}>{dataNasa.date ?? "-"}</Text>
+          </View>
+         
+       
+            <Pressable
+              onPress={() => {router.push('/descripcion')}}
+              style={({ pressed }) => [
+                {
+                  backgroundColor: pressed ? "#63a4ff" : "#1e90ff",
+                  borderRadius: 7,
+                  padding: 8,
+                  width: 80,
+            
+                },
+                styles.wrapperCustom
+          
+              ]}
+            >
+              {({ pressed }) => (
+               
+                <Text
+                  style={{
+                    color: "white",
+                    textAlign: "center",
+                    fontWeight: "bold",
 
-          <Pressable
-            onPress={() => {}}
-            style={({ pressed }) => [
-              {
-                backgroundColor: pressed ? "#63a4ff" : "#1e90ff",
-                borderRadius: 7,
-                padding: 8,
-                width: 80,
-              },
-              styles.wrapperCustom,
-            ]}
-          >
-            {({ pressed }) => (
-              <Text style={{ color: "white", textAlign: "center", fontWeight: 'bold', fontSize: 14 }}>
-                {pressed ? "Soltar" : "Ver"}
-              </Text>
-            )}
-          </Pressable>
+                    fontSize: 14,
+                  }}
+                >
+            
+                  {pressed ? "Soltar" : "Ver"} 
+                </Text>
+              )}
+            </Pressable>
+       
         </View>
       </View>
     </View>

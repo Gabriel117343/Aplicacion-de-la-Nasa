@@ -1,29 +1,20 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-
-} from "react-native";
-import React  from "react";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import React from "react";
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import { ImagenDelDia } from "./ImagenDelDia";
-import { LastFiveImages } from './LastFiveImages'
+import { LastFiveImages } from "./LastFiveImages";
 import { Header } from "./Header";
-import { Cometa } from './shared/Cometa';
-import { Satelite } from './shared/Satelite'
+import { Cometa } from "./shared/Cometa";
+import { Satelite } from "./shared/Satelite";
 import { useSafeAreaInsets } from "react-native-safe-area-context"; // utilidad para obtener los margenes seguros del dispositivo
 
 export default function Main() {
-
-
   const insets = useSafeAreaInsets(); // margenes seguros del dispositivo
   const image = {
     uri: "https://www.ucf.edu/wp-content/blogs.dir/20/files/2021/08/UCF-Space-Exploration.jpg",
   };
 
- 
   return (
     <View
       style={[
@@ -32,29 +23,38 @@ export default function Main() {
       ]}
     >
       <Header />
-
+      
       <LinearGradient
         colors={["#0000CD", "#00008B"]} // Azul profundo en la parte superior y azul profundo ligeramente más claro en la parte inferior
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={styles.containerBackground}
       >
-        <ImageBackground source={image} style={styles.fondoImg} />
+        <ImageBackground source={image}  style={styles.fondoImg} />
         <Satelite />
         <Cometa />
         <View style={styles.overlayContainer}>
           <BlurView intensity={30} style={styles.blurView}>
-            <Text style={{ color: "white", fontWeight: "bold", fontSize: 18 }}>
+            <Text
+              className="bg-black"
+              style={{ color: "white", fontWeight: "bold", fontSize: 18 }}
+            >
               Imagen del Día
             </Text>
           </BlurView>
-
           <ImagenDelDia />
-          <Text style={{color: 'white', opacity: 0.8, marginVertical: 6, fontSize: 18, alignSelf: 'flex-start' }}>
+          <Text
+            style={{
+              color: "white",
+              opacity: 0.8,
+              marginVertical: 6,
+              fontSize: 18,
+              alignSelf: "flex-start",
+            }}
+          >
             Últimos 5 días
           </Text>
           <LastFiveImages />
-          
         </View>
       </LinearGradient>
     </View>
@@ -64,6 +64,7 @@ export default function Main() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    
   },
   containerBackground: {
     flex: 1,
@@ -106,5 +107,4 @@ const styles = StyleSheet.create({
     opacity: 1,
     zIndex: 2,
   },
-
 });

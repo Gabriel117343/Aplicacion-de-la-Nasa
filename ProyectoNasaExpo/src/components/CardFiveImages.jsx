@@ -3,15 +3,13 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   Pressable,
-  FlatList,
-  ScrollView,
   Animated
 } from "react-native";
-import React, { useEffect, useReducer, useRef } from 'react'
-export const CardFiveImages = ({ data }) => {
+import React, { useEffect, useRef } from 'react'
 
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+export const CardFiveImages = ({ data }) => {
 
   return (
     <View style={styles.informacion}>
@@ -26,7 +24,10 @@ export const CardFiveImages = ({ data }) => {
           alignItems: "flex-end",
         }}
       >
-        <Text style={styles.date}>{data.date ?? "-"}</Text>
+        <View style={{ flexDirection: "row", gap: 4 }}>
+            <MaterialIcons name="update" size={19} color="white" style={{ opacity: 0.8}} />
+            <Text style={styles.date}>{data.date ?? "-"}</Text>
+          </View>
         <Pressable
           onPress={() => {}}
           style={({ pressed }) => [
