@@ -21,5 +21,8 @@ export const MenuIcon = (props) => (
   
     <SimpleLineIcons name="menu" {...props} />
 )
-
+export const CloseIcon = (props) => (
+  
+    <MaterialIcons name="close" {...props} />
+)
 // tambien se podrían agregar SVG 

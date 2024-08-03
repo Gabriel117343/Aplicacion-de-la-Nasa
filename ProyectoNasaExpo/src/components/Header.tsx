@@ -1,16 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Image,
   StyleSheet,
   Pressable,
-  Linking,
+
   Animated,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MenuIcon } from "./shared/Icons";
-import { Drawer } from "react-native-paper"; // Menu de opciones
-import { useRouter } from "expo-router";
+
 import { SideMenu } from './SideMenu'
 export const Header = () => {
   const [visible, setVisible] = useState(false);
@@ -32,7 +31,7 @@ export const Header = () => {
       useNativeDriver: true,
     }).start(() => setVisible(false));; // Callback que se ejecuta después de que la animación ha terminado
   };
-  const router = useRouter();
+
 
   return (
     <View style={styles.container}>
