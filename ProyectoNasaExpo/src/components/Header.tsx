@@ -1,15 +1,39 @@
-import React, { useState } from "react";
-import { View, Text, Image, StyleSheet, Pressable, Linking } from "react-native";
+import React, { useState, useRef, useEffect } from "react";
+import {
+  View,
+  Image,
+  StyleSheet,
+  Pressable,
+  Linking,
+  Animated,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MenuIcon } from "./shared/Icons";
 import { Drawer } from "react-native-paper"; // Menu de opciones
-import { useRouter } from 'expo-router'
+import { useRouter } from "expo-router";
+import { SideMenu } from './SideMenu'
 export const Header = () => {
   const [visible, setVisible] = useState(false);
+  const menuAnim = useRef(new Animated.Value(-200)).current; // para que comience oculto el menú lateral y pueda ser animado
 
-  const openMenu = () => setVisible(true);
-  const closeMenu = () => setVisible(false);
+  const openMenu = () => {
+    setVisible(true)
+    Animated.timing(menuAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start()
+    // .star(() => setVisible(true)) > esto no es el comportamiento deseado porque que tiene que ser visible antes de la animación
+  };
+  const closeMenu = () => {
+    Animated.timing(menuAnim, {
+      toValue: -200,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => setVisible(false));; // Callback que se ejecuta después de que la animación ha terminado
+  };
   const router = useRouter();
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -27,61 +51,7 @@ export const Header = () => {
           )}
 
           {visible && (
-            <View style={styles.drawerContainer}>
-              <View style={[styles.fondoMenu, StyleSheet.absoluteFillObject]} />
-              <View style={{ padding: 20, alignSelf: "flex-end" }}>
-                <Pressable onPress={closeMenu}>
-                  <MenuIcon color="white" size={25} />
-                </Pressable>
-              </View>
-
-              <Drawer.Section
-                title="Menu"
-                theme={{ colors: { onSurfaceVariant: 'white' } }}
-              >
-                 <Drawer.Item
-                  label="Home"
-                  icon="home"
-                  rippleColor="green"
-                  theme={{ colors: { onSurfaceVariant: 'white' } }}
-                  onPress={() => {
-                    // Acción para Item 1
-                    closeMenu();
-                    router.push('/')
-                  }}
-                />
-                <Drawer.Item
-                  label="Información"
-                  icon="information"
-                  theme={{ colors: { onSurfaceVariant: 'white' } }}
-                  onPress={() => {
-                    // Acción para Item 1
-                    closeMenu();
-                    router.push('/descripcion')
-                  }}
-                />
-                <Drawer.Item
-                  label="Web"
-                  icon="web"
-                  theme={{ colors: { onSurfaceVariant: 'white' } }}
-                  onPress={() => {
-                    // Acción para Item 2
-                    closeMenu();
-                    Linking.openURL('https://www.nasa.gov/es/');
-                  }}
-                />
-                <Drawer.Item
-                  label="noticias"
-                  icon="newspaper"
-                  theme={{ colors: { onSurfaceVariant: 'white' } }}
-                  onPress={() => {
-                    // Acción para Item 3
-                    closeMenu();
-                    Linking.openURL('https://ciencia.nasa.gov/');
-                  }}
-                />
-              </Drawer.Section>
-            </View>
+            <SideMenu visible={visible} menuAnim={menuAnim} closeMenu={closeMenu} />
           )}
         </View>
         <View style={styles.rightContainer}>
