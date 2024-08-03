@@ -23,14 +23,14 @@ export default function Main() {
       ]}
     >
       <Header />
-      
+
       <LinearGradient
         colors={["#0000CD", "#00008B"]} // Azul profundo en la parte superior y azul profundo ligeramente más claro en la parte inferior
         start={{ x: 0, y: 0 }}
         end={{ x: 0, y: 1 }}
         style={styles.containerBackground}
       >
-        <ImageBackground source={image}  style={styles.fondoImg} />
+        <ImageBackground source={image} style={styles.fondoImg} />
         <Satelite />
         <Cometa />
         <View style={styles.overlayContainer}>
@@ -64,7 +64,6 @@ export default function Main() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    
   },
   containerBackground: {
     flex: 1,
@@ -104,7 +103,6 @@ const styles = StyleSheet.create({
   containerImage: {
     width: 350,
     backgroundColor: "transparent",
-    opacity: 1,
     zIndex: 2,
   },
 });

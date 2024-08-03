@@ -7,9 +7,12 @@ import {
   Animated
 } from "react-native";
 import React, { useEffect, useRef } from 'react'
+import { useRouter } from 'expo-router'
+import { UpdateIcon } from '../components/shared/Icons'
 
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 export const CardFiveImages = ({ data }) => {
+
+  const router = useRouter() // hook para manejar la navegación
 
   return (
     <View style={styles.informacion}>
@@ -25,11 +28,12 @@ export const CardFiveImages = ({ data }) => {
         }}
       >
         <View style={{ flexDirection: "row", gap: 4 }}>
-            <MaterialIcons name="update" size={19} color="white" style={{ opacity: 0.8}} />
+           
+            <UpdateIcon size={19} color="white" style={{ opacity: 0.8 }}/>
             <Text style={styles.date}>{data.date ?? "-"}</Text>
           </View>
         <Pressable
-          onPress={() => {}}
+          onPress={() => router.push('/descripcion')}
           style={({ pressed }) => [
             {
               backgroundColor: pressed ? "#8a91e6" : "#7178df",

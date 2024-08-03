@@ -4,7 +4,7 @@ import { Link, useRouter } from "expo-router";
 import getAllImages from "../api/nasaApi";
 import { VideoDelDia } from "./VideoDelDia";
 import BlurredImageWithLoading from "../ui/BlurredImageWithLoading";
-import Fontisto from '@expo/vector-icons/Fontisto';
+import { DateIcon } from '../components/shared/Icons'
 export const ImagenDelDia = () => {
   const [dataNasa, setDataNasa] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -28,6 +28,8 @@ export const ImagenDelDia = () => {
   // precarga de la imagen de la API de la NASA, si es que ya se obtuvo la data
   const imagenNasa = !isLoading ? dataNasa.url : null;
   console.log(imagenNasa);
+
+
   return (
     <View style={styles.container}>
       <View style={styles.fondoContainer} />
@@ -57,13 +59,14 @@ export const ImagenDelDia = () => {
 
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View style={{ flexDirection: "row", gap: 8 }}>
-            <Fontisto name="date" size={17} color="white" />
+      
+            <DateIcon size={17} color="white"/>
             <Text style={styles.date}>{dataNasa.date ?? "-"}</Text>
           </View>
          
        
             <Pressable
-              onPress={() => {router.push('/descripcion')}}
+              onPress={() => {router.push(`/${dataNasa.date}`)}}
               style={({ pressed }) => [
                 {
                   backgroundColor: pressed ? "#63a4ff" : "#1e90ff",

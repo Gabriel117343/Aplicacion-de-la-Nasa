@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-
-  FlatList,
-
-} from "react-native";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 
 import getAllImages from "../api/nasaApi";
 import { format, sub } from "date-fns"; // formateo de fecha
-import { AnimatedCardFiveImages } from './CardFiveImages'
+import { AnimatedCardFiveImages } from "./CardFiveImages";
+
 export const LastFiveImages = () => {
   const [dataNasa, setDataNasa] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -47,7 +41,9 @@ export const LastFiveImages = () => {
         <FlatList
           data={dataNasa}
           keyExtractor={(item) => item.date}
-          renderItem={({ item, index }) => <AnimatedCardFiveImages data={item} index={index} />}
+          renderItem={({ item, index }) => (
+            <AnimatedCardFiveImages data={item} index={index} />
+          )}
         />
       )}
     </View>
@@ -61,6 +57,4 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: "hidden",
   },
-
-  
 });
