@@ -5,8 +5,13 @@ import getAllImages from "../api/nasaApi";
 import { VideoDelDia } from "./VideoDelDia";
 import BlurredImageWithLoading from "../ui/BlurredImageWithLoading";
 import { DateIcon } from '../components/shared/Icons'
+
+import useDataNasaStore from '../context/dataNasaStore'
 export const ImagenDelDia = () => {
-  const [dataNasa, setDataNasa] = useState([]);
+  // hook para manejar el estado de la data de la API de la NASA
+  const dataNasa = useDataNasaStore((state) => state.data);
+  const setDataNasa = useDataNasaStore((state) => state.setData);
+
   const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter(); // hook para manejar la navegación

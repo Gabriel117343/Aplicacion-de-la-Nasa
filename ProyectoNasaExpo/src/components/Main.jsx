@@ -18,11 +18,11 @@ export default function Main() {
   return (
     <View
       style={[
-        { paddingTop: insets.top, paddingBottom: insets.bottom },
         styles.container,
+  
       ]}
     >
-      <Header />
+
 
       <LinearGradient
         colors={["#0000CD", "#00008B"]} // Azul profundo en la parte superior y azul profundo ligeramente más claro en la parte inferior

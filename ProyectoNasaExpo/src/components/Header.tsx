@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
+
   },
   leftContainer: {
     flex: 2,
@@ -86,18 +87,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
   },
-  drawerContainer: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    width: 180,
-    marginTop: -32,
 
-    zIndex: 1000,
-    height: 800,
-  },
-  fondoMenu: {
-    backgroundColor: "black",
-    opacity: 0.8,
-  },
+
 });

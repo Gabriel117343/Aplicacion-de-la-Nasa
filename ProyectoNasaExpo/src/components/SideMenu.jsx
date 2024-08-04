@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     left: 0,
     width: 180,
     marginTop: -32,
-    zIndex: 1000,
+    zIndex: 100,
     height: 800,
   },
   fondoMenu: {
