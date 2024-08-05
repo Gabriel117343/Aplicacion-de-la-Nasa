@@ -10,7 +10,7 @@ const nasaAPI = axios.create({
 
 // esta función puede o no recibir un parámetro opcional para obtener imágenes de la NASA con filtros
 export default function getAllImages (urlParams) {
-  console.log(urlParams)
+
   // el operador de coalesencia nula o Nullish coalescing operator (??) se utiliza para verificar si el valor de la variable es nulo o indefinido
   return nasaAPI.get(`?api_key=${NASA_API_KEY}${urlParams ?? ''}`);
   
