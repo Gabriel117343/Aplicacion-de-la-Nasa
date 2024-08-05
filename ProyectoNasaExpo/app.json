@@ -4,7 +4,7 @@
     "slug": "ProyectoNasaExpo",
     "version": "1.1.0",
     "orientation": "portrait",
-    "icon": "./assets/nasa-icon.png",
+    "icon": "./assets/nasa-logo.png",
     "userInterfaceStyle": "light",
     "scheme": "nasa",
     "splash": {
