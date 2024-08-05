@@ -42,7 +42,7 @@
 | tailwindcss           | 3.3.2     |
 
 > Imagenes de la App
-<div style="display: flex; justify-content: space-around; align-items: center; gap: 20px;">
+<div style="display: flex; justify-content: space-around; align-items: center; gap: 50px;">
   <img src="https://github.com/user-attachments/assets/04c5e92e-2498-4fd6-a3b1-40e4d83a8d70" alt="NASA Image 1" width="25%" />
   <img src="https://github.com/user-attachments/assets/c3717147-ff37-49a5-be46-e74170669c74" alt="NASA Image 2" width="25%" />
   <img src="https://github.com/user-attachments/assets/d9ba03c4-4e0b-406b-8c43-cffecfb9cb5d" alt="NASA Image 3" width="25%" />
