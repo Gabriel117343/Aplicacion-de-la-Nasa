@@ -7,7 +7,7 @@ import { Header } from "./Header";
 export const Screen = ({ children }) => {
   return (
     <LinearGradient
-      colors={["#271f50", "#1b163d", "#120f2c"]}
+      colors={["#1a1440", "#120f2c", "#0a0818"]}
       start={{ x: 0, y: 0 }}
       end={{ x: 0.5, y: 1 }}
       style={styles.gradient}
@@ -23,7 +23,7 @@ export const Screen = ({ children }) => {
 const styles = StyleSheet.create({
   gradient: {
     flex: 1,
-   
+    marginHorizontal: 0.5,
   },
   container: {
     flex: 1,

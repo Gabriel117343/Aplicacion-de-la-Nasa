@@ -1,22 +1,64 @@
-import React from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, Image, Button, Pressable } from "react-native";
 import useDataNasaStore from "../../context/dataNasaStore";
 import { BlurredImageWithLoading } from "../../ui/BlurredImageWithLoading";
 import { DateIcon } from "../shared/Icons";
 
 import { VideoDelDia } from "../VideoDelDia";
-
+import translateText from "../../api/translateApi";
 import { Screen } from "./Screen";
+
 export const Descripcion = ({ date }) => {
   // Información del estado global de la aplicación
   const dataNasa = useDataNasaStore((state) => state.data);
   const dataNasaFiltrado = dataNasa?.find((item) => item.date === date);
-  
-  // Divide el texto en párrafos
-  const paragraphs = dataNasaFiltrado?.explanation ? dataNasaFiltrado.explanation.split(".") : [];
-  paragraphs.pop() // se elimina el último elemento resultante de split, que es un string vacío
+  const [dataNasaTraducido, setDataNasaTraducido] = useState(null);
+  const [paragraphs, setParagraphs] = useState([]);
 
+  const [loadingTraduccion, setLoadingTraduccion] = useState(false);
+  const [mostrarTraduccion, setMostrarTraduccion] = useState(false);
+  const separarEnParrafos = (texto) => {
 
+    if (!texto) return;
+    // Divide el texto en párrafos
+    const newParagraphs = texto?.split(".");
+    newParagraphs.pop(); // se elimina el último elemento resultante de split, que es un string vacío
+    setParagraphs(newParagraphs);
+  };
+
+  const traducir = async () => {
+    if (!dataNasaTraducido) {
+      setLoadingTraduccion(true);
+      try {
+        // traducir el texto de la descripción a español
+        const response = await translateText(
+          dataNasaFiltrado?.explanation,
+          "ES"
+        );
+        if (response.data) {
+          const texto = response.data.translations[0].text;
+          setDataNasaTraducido(texto);
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoadingTraduccion(false);
+      }
+    }
+    setMostrarTraduccion(!mostrarTraduccion); // se alterna el estado de mostrar traducción
+  };
+
+  useEffect(() => {
+    // se actualiza el texto a mostrar en la descripción
+    const cambiarTextoMostrado = () => {
+      if (!mostrarTraduccion) {
+        separarEnParrafos(dataNasaFiltrado?.explanation);
+      } else {
+        separarEnParrafos(dataNasaTraducido);
+      }
+    };
+    cambiarTextoMostrado();
+  }, [mostrarTraduccion, dataNasaFiltrado]);
 
   return (
     <Screen>
@@ -37,9 +79,7 @@ export const Descripcion = ({ date }) => {
               />
             )
           ) : (
-      
-              <BlurredImageWithLoading />
-
+            <BlurredImageWithLoading />
           )}
         </View>
 
@@ -48,10 +88,29 @@ export const Descripcion = ({ date }) => {
           <Text style={styles.date}>{dataNasaFiltrado?.date ?? "-"}</Text>
         </View>
 
-        <View >
+        <Pressable
+          onPress={traducir}
+          style={({ pressed }) => [
+            {
+              backgroundColor: pressed ? "#8a91e6" : "#00008B",
+              borderRadius: 7,
+              padding: 8,
+              width: 80,
+              borderColor: "#8a91e6",
+              borderWidth: 1,
+              opacity: !!loadingTraduccion ? 0.5 : 1,
+            },
+            styles.wrapperCustom,
+          ]}
+        >
+          <Text style={{ color: "white", textAlign: "center", fontSize: 14 }}>
+            Traducir
+          </Text>
+        </Pressable>
+        <View style={{ marginTop: 20 }}>
           {paragraphs.map((paragraph, index) => (
             <Text key={index} style={styles.paragraph}>
-            {paragraph}.
+              {paragraph}.
             </Text>
           ))}
         </View>
@@ -92,7 +151,7 @@ const styles = StyleSheet.create({
   image: {
     aspectRatio: "15/10",
   },
- 
+
   paragraph: {
     marginBottom: 10,
     fontSize: 16,

@@ -79,7 +79,7 @@ export const SideMenu = ({ visible, menuAnim, closeMenu }) => {
             theme={{ colors: { onSurfaceVariant: "white" } }}
             onPress={() => {
               closeMenu();
-              router.push("/descripcion");
+              router.push("/informacion");
             }}
           />
           <Drawer.Item

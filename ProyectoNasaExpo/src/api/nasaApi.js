@@ -1,4 +1,4 @@
-import Constants from 'expo-constants';
+
 import axios from 'axios';
 import { NASA_API_KEY } from '@env' // importa la variable de entorno API_KEY
 

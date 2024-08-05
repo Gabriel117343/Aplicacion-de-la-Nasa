@@ -1,7 +1,7 @@
 import { View, ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Stack } from "expo-router";
-import { Header } from "../src/components/descripcion/Header";
+
 import { Descripcion } from "../src/components/descripcion/Descripcion";
 export default function Detail() {
   // se recupera la fecha de la URL

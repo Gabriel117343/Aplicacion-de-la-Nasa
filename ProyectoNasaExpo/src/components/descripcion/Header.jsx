@@ -8,7 +8,7 @@ import { Link } from "expo-router";
 export const Header = () => {
   return (
     <View style={styles.container}>
-      <BlurView intensity={15} t style={StyleSheet.absoluteFill} />
+      <BlurView tint="default" intensity={15} t style={StyleSheet.absoluteFill} />
       <View style={styles.left}>
         <Link asChild href="/">
           <Pressable>

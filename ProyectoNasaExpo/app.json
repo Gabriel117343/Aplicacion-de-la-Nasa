@@ -7,7 +7,6 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "scheme": "nasa",
- 
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -17,16 +16,34 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": [
+        "INTERNET"
+      ],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.gabriel117343.ProyectoNasaExpo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "2c40981d-4fe1-4d1e-a314-300a8aaa9e9a"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/2c40981d-4fe1-4d1e-a314-300a8aaa9e9a"
+    }
   }
 }
