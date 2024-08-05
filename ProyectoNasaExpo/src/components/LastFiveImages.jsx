@@ -4,26 +4,30 @@ import { StyleSheet, Text, View, FlatList } from "react-native";
 import getAllImages from "../api/nasaApi";
 import { format, sub } from "date-fns"; // formateo de fecha
 import { AnimatedCardFiveImages } from "./CardFiveImages";
+import useDataNasaStore from "../context/dataNasaStore";
 
 export const LastFiveImages = () => {
-  const [dataNasa, setDataNasa] = useState([]);
+  // hook para manejar el estado de la data de la API de la NASA
+  const dataNasa = useDataNasaStore((state) => state.data);
+  const setDataNasa = useDataNasaStore((state) => state.setData);
   const [isLoading, setIsLoading] = useState(true);
+
+  const date = new Date(); // fecha de hoy
+
+  const todaysDate = format(date, "yyyy-MM-dd");
+  const fiveDaysAgoDate = format(sub(date, { days: 5 }), "yyyy-MM-dd");
 
   useEffect(() => {
     async function cargarData() {
       try {
-        const date = new Date(); // fecha de hoy
-        // la fecha de hoy y la de hace 5 días
-        const todaysDate = format(date, "yyyy-MM-dd");
-        const fiveDaysAgoDate = format(sub(date, { days: 5 }), "yyyy-MM-dd");
         // se obtiene un Array de objetos con las imagenes de los últimos 5 días
-
         const data = await getAllImages(
           `&start_date=${fiveDaysAgoDate}&end_date=${todaysDate}`
         );
 
         if (data.data) {
-          setDataNasa(data.data.toReversed());
+          setDataNasa(data.data.toReversed()); // toRevesed crea una copia superficial del array y lo invierte
+
           setIsLoading(false);
         }
       } catch (error) {
@@ -39,7 +43,7 @@ export const LastFiveImages = () => {
         <Text style={{ color: "white", textAlign: "center" }}>Cargando...</Text>
       ) : (
         <FlatList
-          data={dataNasa}
+          data={dataNasa.filter((item) => item.date !== todaysDate)}
           keyExtractor={(item) => item.date}
           renderItem={({ item, index }) => (
             <AnimatedCardFiveImages data={item} index={index} />

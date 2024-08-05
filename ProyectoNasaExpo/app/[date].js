@@ -5,7 +5,7 @@ import { Header } from "../src/components/descripcion/Header";
 import { Descripcion } from "../src/components/descripcion/Descripcion";
 export default function Detail() {
   // se recupera la fecha de la URL
-  const { date } = useLocalSearchParams();
+  const { date } = useLocalSearchParams(); // serviara para filtrar la data del estado global por la fecha de la URL
 
   return (
     <ScrollView>
@@ -15,7 +15,7 @@ export default function Detail() {
             headerShown: false, // Oculta el encabezado
           }}
         />
-        <Descripcion />
+        <Descripcion date={date}/>
       </View>
     </ScrollView>
   );

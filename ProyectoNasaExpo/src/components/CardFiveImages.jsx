@@ -33,7 +33,7 @@ export const CardFiveImages = ({ data }) => {
             <Text style={styles.date}>{data.date ?? "-"}</Text>
           </View>
         <Pressable
-          onPress={() => router.push('/descripcion')}
+          onPress={() => router.push(`/${data.date}`)}
           style={({ pressed }) => [
             {
               backgroundColor: pressed ? "#8a91e6" : "#7178df",

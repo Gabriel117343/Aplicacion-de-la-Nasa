@@ -6,11 +6,10 @@ import { VideoDelDia } from "./VideoDelDia";
 import BlurredImageWithLoading from "../ui/BlurredImageWithLoading";
 import { DateIcon } from '../components/shared/Icons'
 
-import useDataNasaStore from '../context/dataNasaStore'
+
 export const ImagenDelDia = () => {
-  // hook para manejar el estado de la data de la API de la NASA
-  const dataNasa = useDataNasaStore((state) => state.data);
-  const setDataNasa = useDataNasaStore((state) => state.setData);
+  // solo se utiliza para presentación por lo que no se guarda en el estado global
+  const [dataNasa, setDataNasa] = useState([])
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -30,7 +29,7 @@ export const ImagenDelDia = () => {
     }
     cargarData();
   }, []);
-  // precarga de la imagen de la API de la NASA, si es que ya se obtuvo la data
+
   const imagenNasa = !isLoading ? dataNasa.url : null;
   console.log(imagenNasa);
 
@@ -72,6 +71,7 @@ export const ImagenDelDia = () => {
        
             <Pressable
               onPress={() => {router.push(`/${dataNasa.date}`)}}
+              disabled={isLoading} // se deshabilita el botón si isLoading es true
               style={({ pressed }) => [
                 {
                   backgroundColor: pressed ? "#63a4ff" : "#1e90ff",

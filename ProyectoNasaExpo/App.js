@@ -1,7 +1,7 @@
 import React from "react";
 import Main from "./src/components/Main";
 
-import { StyleSheet, View, StatusBar } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context"; // proveera un area segura para los componentes
 
 export default function App() {

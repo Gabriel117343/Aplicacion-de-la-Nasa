@@ -4,26 +4,19 @@ import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import { ImagenDelDia } from "./ImagenDelDia";
 import { LastFiveImages } from "./LastFiveImages";
-import { Header } from "./Header";
+
 import { Cometa } from "./shared/Cometa";
 import { Satelite } from "./shared/Satelite";
-import { useSafeAreaInsets } from "react-native-safe-area-context"; // utilidad para obtener los margenes seguros del dispositivo
+
 
 export default function Main() {
-  const insets = useSafeAreaInsets(); // margenes seguros del dispositivo
+
   const image = {
     uri: "https://www.ucf.edu/wp-content/blogs.dir/20/files/2021/08/UCF-Space-Exploration.jpg",
   };
 
   return (
-    <View
-      style={[
-        styles.container,
-  
-      ]}
-    >
-
-
+    <View style={[styles.container]}>
       <LinearGradient
         colors={["#0000CD", "#00008B"]} // Azul profundo en la parte superior y azul profundo ligeramente más claro en la parte inferior
         start={{ x: 0, y: 0 }}

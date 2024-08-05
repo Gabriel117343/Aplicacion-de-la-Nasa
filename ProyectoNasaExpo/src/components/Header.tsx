@@ -35,6 +35,7 @@ export const Header = () => {
 
   return (
     <View style={styles.container}>
+
       <LinearGradient
         // Background Linear Gradient
         colors={["#3f448C", "#6258df"]}
