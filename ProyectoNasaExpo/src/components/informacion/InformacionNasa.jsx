@@ -1,7 +1,10 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Screen } from "../descripcion/Screen";
-import { styled } from "nativewind";
 
+import Constants from 'expo-constants';
+import { NASA_API_KEY } from '@env' // importa la variable de entorno API_KEY
+
+const KEY = NASA_API_KEY || Constants.expoConfig.extra.nasaApiKey || process.env.NASA_API_KEY
 export default function InformacionNasa() {
   return (
     <Screen>
@@ -35,6 +38,7 @@ export default function InformacionNasa() {
           La NASA también ha sido pionera en el desarrollo de tecnologías
           espaciales, como los cohetes Saturno V y el..
         </Text>
+        <Text>{KEY.split('').slice(0,2)}</Text>
       </View>
     </Screen>
   );
