@@ -3,7 +3,7 @@ import { DEEPL_API_KEY } from "@env";
 import Constants from 'expo-constants';
 
 
-const KEY = DEEPL_API_KEY || Constants.expoConfig.extra.deeplApiKey;
+const KEY = DEEPL_API_KEY || Constants.expoConfig.extra.deeplApiKey || process.env.DEEPL_API_KEY;
 // esta función recibe un texto y un idioma al que se desea traducir
 export default function translateText(text, targetLang) {
 

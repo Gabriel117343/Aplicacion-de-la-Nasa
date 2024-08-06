@@ -3,7 +3,7 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 import { NASA_API_KEY } from '@env' // importa la variable de entorno API_KEY
 
-const KEY = NASA_API_KEY || Constants.expoConfig.extra.nasaApiKey;
+const KEY = NASA_API_KEY || Constants.expoConfig.extra.nasaApiKey || process.env.NASA_API_KEY
 
 // Creación de una instancia de axios para acceder a la API de la NASA
 const nasaAPI = axios.create({

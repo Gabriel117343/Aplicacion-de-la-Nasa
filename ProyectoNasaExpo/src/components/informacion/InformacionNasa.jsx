@@ -33,7 +33,7 @@ export default function InformacionNasa() {
         </Text>
         <Text style={styles.text}>
           La NASA también ha sido pionera en el desarrollo de tecnologías
-          espaciales, como los cohetes Saturno V y el...
+          espaciales, como los cohetes Saturno V y el..
         </Text>
       </View>
     </Screen>
