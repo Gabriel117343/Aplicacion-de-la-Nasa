@@ -9,6 +9,7 @@ export default ({ config }) => {
     android: {
       ...config.android,
       package: process.env.APP_ENV === 'production' ? 'com.my.app' : 'com.my.app.dev',
+      permissions: ['INTERNET']
     },
     extra: {
       nasaApiKey: process.env.NASA_API_KEY,

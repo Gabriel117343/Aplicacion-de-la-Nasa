@@ -40,7 +40,12 @@ export const Descripcion = ({ date }) => {
           setDataNasaTraducido(texto);
         }
       } catch (error) {
-        console.error(error);
+        if (error.response) {
+          throw new Error(error?.response?.data?.error ?? "Error en la petición");
+        } else {
+          throw new Error(error ?? "Hubo un error al traducir la descripción");
+        }
+
       } finally {
         setLoadingTraduccion(false);
       }

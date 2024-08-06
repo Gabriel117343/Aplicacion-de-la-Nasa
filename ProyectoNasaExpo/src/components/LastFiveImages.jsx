@@ -31,7 +31,11 @@ export const LastFiveImages = () => {
           setIsLoading(false);
         }
       } catch (error) {
-        console.error(error);
+        if (error.response) {
+          throw new Error(error?.response?.data?.error ?? "Error en la petición");
+        } else {
+          throw new Error(error ?? "No se pudo cargar la información de la NASA");
+        }
       }
     }
     cargarData();

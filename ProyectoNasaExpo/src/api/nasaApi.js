@@ -7,14 +7,14 @@ const KEY = NASA_API_KEY || Constants.expoConfig.extra.nasaApiKey;
 
 // Creación de una instancia de axios para acceder a la API de la NASA
 const nasaAPI = axios.create({
-  baseURL: 'https://api.nasa.gov/planetary/apod'
+  baseURL: 'https://api.nasa.gov/planetary/apod',
+  timeout: 8000
 });
 
 // esta función puede o no recibir un parámetro opcional para obtener imágenes de la NASA con filtros
 export default function getAllImages (urlParams) {
-  if (!KEY) {
-    return Promise.reject(new Error('Se espera una API Key de la NASA'));
-  }
+  if (!KEY) return Promise.reject(new Error('Se espera una API Key de la NASA'));
+  
   // el operador de coalesencia nula o Nullish coalescing operator (??) se utiliza para verificar si el valor de la variable es nulo o indefinido
   return nasaAPI.get(`?api_key=${KEY}${urlParams ?? ''}`);
   

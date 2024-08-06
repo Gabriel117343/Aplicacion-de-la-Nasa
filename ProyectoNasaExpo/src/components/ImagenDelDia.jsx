@@ -24,7 +24,12 @@ export const ImagenDelDia = () => {
           setIsLoading(false);
         }
       } catch (error) {
-        console.log(error);
+        if (error.response) {
+          throw new Error(error?.response?.data?.error ?? "Error en la petición");
+        } else {
+          throw new Error(error ?? "No se pudo cargar la información de la NASA");
+        }
+
       }
     }
     cargarData();
