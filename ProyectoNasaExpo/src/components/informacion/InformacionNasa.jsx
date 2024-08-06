@@ -2,9 +2,9 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import { Screen } from "../descripcion/Screen";
 
 import Constants from 'expo-constants';
-import { NASA_API_KEY } from '@env' // importa la variable de entorno API_KEY
 
-const KEY = NASA_API_KEY || Constants.expoConfig.extra.nasaApiKey || process.env.NASA_API_KEY
+
+
 export default function InformacionNasa() {
   return (
     <Screen>
@@ -36,10 +36,9 @@ export default function InformacionNasa() {
         </Text>
         <Text style={styles.text}>
           La NASA también ha sido pionera en el desarrollo de tecnologías
-          espaciales, como los cohetes Saturno V y el..
+          espaciales, como los cohetes Saturno V y el...
         </Text>
-        <Text styles={{ fontSize: 8, color: 'white' }}>{KEY.split('').slice(0,2)}</Text>
-        <Text styles={{ fontSize: 8, color: 'white' }}>{!!KEY}</Text>
+  
       </View>
     </Screen>
   );

@@ -43,6 +43,7 @@ export const Descripcion = ({ date }) => {
         if (error.response) {
           throw new Error(error?.response?.data?.error ?? "Error en la petición");
         } else {
+          console.error(error);
           throw new Error(error ?? "Hubo un error al traducir la descripción");
         }
 

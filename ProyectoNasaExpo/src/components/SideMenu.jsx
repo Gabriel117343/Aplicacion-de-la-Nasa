@@ -4,12 +4,12 @@ import { Drawer } from "react-native-paper";
 import { MenuIcon, CloseIcon } from "./shared/Icons";
 
 import { useRouter } from "expo-router";
-
+import ApiKeyModal from "./ApiKeyModal";
 export const SideMenu = ({ visible, menuAnim, closeMenu }) => {
   const router = useRouter(); // Hook de navegación
   const rotateAnim = useRef(new Animated.Value(0)).current; // Nueva referencia para la rotación
   const [iconClose, setIconClose] = useState(false);
-
+  const [modalVisible, setModalVisible] = useState(false);
   const animacionRotacion = () => {
     const rotate = Animated.sequence([
       Animated.timing(rotateAnim, {
@@ -24,10 +24,9 @@ export const SideMenu = ({ visible, menuAnim, closeMenu }) => {
       }),
     ]);
     rotate.start(() => setIconClose(!iconClose));
-  }
+  };
   useEffect(() => {
     animacionRotacion();
-   
   }, []);
   const rotateInterpolate = rotateAnim.interpolate({
     inputRange: [-10, 10],
@@ -35,73 +34,91 @@ export const SideMenu = ({ visible, menuAnim, closeMenu }) => {
   });
   return (
     visible && (
-      <Animated.View
-        style={[
-          styles.drawerContainer,
-          { transform: [{ translateX: menuAnim }] },
-        ]}
-      >
-        <View style={[styles.fondoMenu, StyleSheet.absoluteFillObject]} />
-        <View style={{ padding: 25, alignSelf: "flex-end", height: 80 }}>
-          <Pressable onPress={() => {
-            setIconClose(!iconClose);
-            closeMenu();
-          }}>
-            <Animated.View
-              style={{ transform: [{ rotate: rotateInterpolate }] }}
-            >
-              {iconClose ? (
-                <CloseIcon color="white" size={34} />
-              ) : (
-                <MenuIcon color="white" size={25} />
-              )}
-            </Animated.View>
-          </Pressable>
-        </View>
-
-        <Drawer.Section
-          title="Menu"
-          theme={{ colors: { onSurfaceVariant: "white" } }}
+      <>
+        <Animated.View
+          style={[
+            styles.drawerContainer,
+            { transform: [{ translateX: menuAnim }] },
+          ]}
         >
-          <Drawer.Item
-            label="Home"
-            icon="home"
-            rippleColor="green"
+          <View style={[styles.fondoMenu, StyleSheet.absoluteFillObject]} />
+          <View style={{ padding: 25, alignSelf: "flex-end", height: 80 }}>
+            <Pressable
+              onPress={() => {
+                setIconClose(!iconClose);
+                closeMenu();
+              }}
+            >
+              <Animated.View
+                style={{ transform: [{ rotate: rotateInterpolate }] }}
+              >
+                {iconClose ? (
+                  <CloseIcon color="white" size={34} />
+                ) : (
+                  <MenuIcon color="white" size={25} />
+                )}
+              </Animated.View>
+            </Pressable>
+          </View>
+
+          <Drawer.Section
+            title="Menu"
             theme={{ colors: { onSurfaceVariant: "white" } }}
-            onPress={() => {
-              closeMenu();
-              router.push("/");
-            }}
-          />
-          <Drawer.Item
-            label="Información"
-            icon="information"
-            theme={{ colors: { onSurfaceVariant: "white" } }}
-            onPress={() => {
-              closeMenu();
-              router.push("/informacion");
-            }}
-          />
-          <Drawer.Item
-            label="Web"
-            icon="web"
-            theme={{ colors: { onSurfaceVariant: "white" } }}
-            onPress={() => {
-              closeMenu();
-              Linking.openURL("https://www.nasa.gov/es/");
-            }}
-          />
-          <Drawer.Item
-            label="noticias"
-            icon="newspaper"
-            theme={{ colors: { onSurfaceVariant: "white" } }}
-            onPress={() => {
-              closeMenu();
-              Linking.openURL("https://ciencia.nasa.gov/");
-            }}
-          />
-        </Drawer.Section>
-      </Animated.View>
+          >
+            <Drawer.Item
+              label="Home"
+              icon="home"
+              rippleColor="green"
+              theme={{ colors: { onSurfaceVariant: "white" } }}
+              onPress={() => {
+                closeMenu();
+                router.push("/");
+              }}
+            />
+            <Drawer.Item
+              label="Información"
+              icon="information"
+              theme={{ colors: { onSurfaceVariant: "white" } }}
+              onPress={() => {
+                closeMenu();
+                router.push("/informacion");
+              }}
+            />
+            <Drawer.Item
+              label="Web"
+              icon="web"
+              theme={{ colors: { onSurfaceVariant: "white" } }}
+              onPress={() => {
+                closeMenu();
+                Linking.openURL("https://www.nasa.gov/es/");
+              }}
+            />
+            <Drawer.Item
+              label="noticias"
+              icon="newspaper"
+              theme={{ colors: { onSurfaceVariant: "white" } }}
+              onPress={() => {
+                closeMenu();
+                Linking.openURL("https://ciencia.nasa.gov/");
+              }}
+            />
+            <Drawer.Item
+              label="API Key"
+              icon="key"
+              theme={{ colors: { onSurfaceVariant: "white" } }}
+              onPress={() => {
+              
+                setModalVisible(true); // Mostrar el modal
+              }}
+            />
+          </Drawer.Section>
+        </Animated.View>
+        <ApiKeyModal
+          visible={modalVisible}
+          onDismiss={() => setModalVisible(false)}
+          closeMenu={closeMenu}
+        />
+      </>
     )
   );
 };

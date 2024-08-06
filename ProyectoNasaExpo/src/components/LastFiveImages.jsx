@@ -5,6 +5,7 @@ import getAllImages from "../api/nasaApi";
 import { format, sub } from "date-fns"; // formateo de fecha
 import { AnimatedCardFiveImages } from "./CardFiveImages";
 import useDataNasaStore from "../context/dataNasaStore";
+import useApiKey from '../hooks/useApiKey';
 
 export const LastFiveImages = () => {
   // hook para manejar el estado de la data de la API de la NASA
@@ -16,14 +17,14 @@ export const LastFiveImages = () => {
 
   const todaysDate = format(date, "yyyy-MM-dd");
   const fiveDaysAgoDate = format(sub(date, { days: 5 }), "yyyy-MM-dd");
+  const keyGuardada = useApiKey(); // si no se ha guardado una API Key se obtiene null
 
   useEffect(() => {
     async function cargarData() {
       try {
-        // se obtiene un Array de objetos con las imagenes de los últimos 5 días
-        const data = await getAllImages(
-          `&start_date=${fiveDaysAgoDate}&end_date=${todaysDate}`
-        );
+        // se obtiene un Array de objetos con las imagenes de los 
+        
+        const data = await getAllImages({ urlParams: `&start_date=${fiveDaysAgoDate}&end_date=${todaysDate}`, keyIngresada: keyGuardada });
 
         if (data.data) {
           setDataNasa(data.data.toReversed()); // toRevesed crea una copia superficial del array y lo invierte
@@ -34,13 +35,14 @@ export const LastFiveImages = () => {
         if (error.response) {
           throw new Error(error?.response?.data?.error ?? "Error en la petición");
         } else {
+          console.error(error);
           throw new Error(error ?? "No se pudo cargar la información de la NASA");
         }
       }
     }
     cargarData();
-  }, []);
-  console.log({ datos: dataNasa });
+  }, [keyGuardada]); // se ejecuta cada vez que se cambia la API Key
+
   return (
     <View style={styles.container}>
       {isLoading ? (

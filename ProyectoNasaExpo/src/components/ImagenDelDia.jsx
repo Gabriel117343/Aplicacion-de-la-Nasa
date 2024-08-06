@@ -4,20 +4,24 @@ import { Link, useRouter } from "expo-router";
 import getAllImages from "../api/nasaApi";
 import { VideoDelDia } from "./VideoDelDia";
 import BlurredImageWithLoading from "../ui/BlurredImageWithLoading";
-import { DateIcon } from '../components/shared/Icons'
-
+import { DateIcon } from "../components/shared/Icons";
+import useApiKey from "../hooks/useApiKey";
 
 export const ImagenDelDia = () => {
   // solo se utiliza para presentación por lo que no se guarda en el estado global
-  const [dataNasa, setDataNasa] = useState([])
+  const [dataNasa, setDataNasa] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
 
+  const keyGuardada = useApiKey(); // si no se ha guardado una API Key se obtiene null
   const router = useRouter(); // hook para manejar la navegación
   useEffect(() => {
     async function cargarData() {
       try {
-        const data = await getAllImages();
+        const data = await getAllImages({
+          urlParams: "",
+          keyIngresada: keyGuardada,
+        });
         // en caso de que se haya obtenido la data de la API se setea el estado
         if (data.data) {
           setDataNasa(data.data);
@@ -25,19 +29,22 @@ export const ImagenDelDia = () => {
         }
       } catch (error) {
         if (error.response) {
-          throw new Error(error?.response?.data?.error ?? "Error en la petición");
+          throw new Error(
+            error?.response?.data?.error ?? "Error en la petición"
+          );
         } else {
-          throw new Error(error ?? "No se pudo cargar la información de la NASA");
+          console.error(error);
+          throw new Error(
+            error ?? "No se pudo cargar la información de la NASA"
+          );
         }
-
       }
     }
     cargarData();
-  }, []);
+  }, [keyGuardada]); // se ejecuta cada vez que se cambia la API Key
 
   const imagenNasa = !isLoading ? dataNasa.url : null;
   console.log(imagenNasa);
-
 
   return (
     <View style={styles.container}>
@@ -68,44 +75,39 @@ export const ImagenDelDia = () => {
 
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <View style={{ flexDirection: "row", gap: 8 }}>
-      
-            <DateIcon size={17} color="white"/>
+            <DateIcon size={17} color="white" />
             <Text style={styles.date}>{dataNasa.date ?? "-"}</Text>
           </View>
-         
-       
-            <Pressable
-              onPress={() => {router.push(`/${dataNasa.date}`)}}
-              disabled={isLoading} // se deshabilita el botón si isLoading es true
-              style={({ pressed }) => [
-                {
-                  backgroundColor: pressed ? "#63a4ff" : "#1e90ff",
-                  borderRadius: 7,
-                  padding: 8,
-                  width: 80,
-            
-                },
-                styles.wrapperCustom
-          
-              ]}
-            >
-              {({ pressed }) => (
-               
-                <Text
-                  style={{
-                    color: "white",
-                    textAlign: "center",
-                    fontWeight: "bold",
 
-                    fontSize: 14,
-                  }}
-                >
-            
-                  {pressed ? "Soltar" : "Ver"} 
-                </Text>
-              )}
-            </Pressable>
-       
+          <Pressable
+            onPress={() => {
+              router.push(`/${dataNasa.date}`);
+            }}
+            disabled={isLoading} // se deshabilita el botón si isLoading es true
+            style={({ pressed }) => [
+              {
+                backgroundColor: pressed ? "#63a4ff" : "#1e90ff",
+                borderRadius: 7,
+                padding: 8,
+                width: 80,
+              },
+              styles.wrapperCustom,
+            ]}
+          >
+            {({ pressed }) => (
+              <Text
+                style={{
+                  color: "white",
+                  textAlign: "center",
+                  fontWeight: "bold",
+
+                  fontSize: 14,
+                }}
+              >
+                {pressed ? "Soltar" : "Ver"}
+              </Text>
+            )}
+          </Pressable>
         </View>
       </View>
     </View>
