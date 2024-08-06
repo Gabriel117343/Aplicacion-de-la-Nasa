@@ -11,14 +11,16 @@
       "distribution": "internal",
       "env": {
         "NASA_API_KEY": "@env:NASA_API_KEY",
-        "DEEPL_API_KEY": "@env:DEEPL_API_KEY"
+        "DEEPL_API_KEY": "@env:DEEPL_API_KEY",
+        "APP_ENV": "development"
       }
     },
     "preview": {
       "distribution": "internal",
       "env": {
         "NASA_API_KEY": "@env:NASA_API_KEY",
-        "DEEPL_API_KEY": "@env:DEEPL_API_KEY"
+        "DEEPL_API_KEY": "@env:DEEPL_API_KEY",
+        "APP_ENV": "preview"
       }
     },
     "production": {
@@ -28,7 +30,8 @@
       },
       "env": {
         "NASA_API_KEY": "@env:NASA_API_KEY",
-        "DEEPL_API_KEY": "@env:DEEPL_API_KEY"
+        "DEEPL_API_KEY": "@env:DEEPL_API_KEY",
+        "APP_ENV": "production"
       }
     }
   },

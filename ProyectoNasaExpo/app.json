@@ -20,7 +20,7 @@
         "INTERNET"
       ],
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/nasa-logo.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.gabriel117343.ProyectoNasaExpo"
