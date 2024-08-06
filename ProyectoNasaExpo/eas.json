@@ -4,13 +4,33 @@
   },
   "build": {
     "development": {
+      "android": {
+        "buildType": "apk"
+      },
       "developmentClient": true,
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "NASA_API_KEY": "@env:NASA_API_KEY",
+        "DEEPL_API_KEY": "@env:DEEPL_API_KEY"
+      }
     },
     "preview": {
-      "distribution": "internal"
+      "distribution": "internal",
+      "env": {
+        "NASA_API_KEY": "@env:NASA_API_KEY",
+        "DEEPL_API_KEY": "@env:DEEPL_API_KEY"
+      }
     },
-    "production": {}
+    "production": {
+      "distribution": "store",
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "NASA_API_KEY": "@env:NASA_API_KEY",
+        "DEEPL_API_KEY": "@env:DEEPL_API_KEY"
+      }
+    }
   },
   "submit": {
     "production": {}
