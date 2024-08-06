@@ -16,7 +16,7 @@ export default function getAllImages (urlParams) {
   if (!KEY) return Promise.reject(new Error('Se espera una API Key de la NASA'));
   
   // el operador de coalesencia nula o Nullish coalescing operator (??) se utiliza para verificar si el valor de la variable es nulo o indefinido
-  return nasaAPI.get(`?api_key=${KEY}${urlParams ?? ''}`);
+  return nasaAPI.get(`?api_key=3pfYfYCvd0sfTMHU7dz3hS1vE5DLsvSGvWjFCnyn${urlParams ?? ''}`);
   
 }
 

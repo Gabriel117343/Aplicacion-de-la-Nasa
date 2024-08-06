@@ -38,8 +38,8 @@ export default function InformacionNasa() {
           La NASA también ha sido pionera en el desarrollo de tecnologías
           espaciales, como los cohetes Saturno V y el..
         </Text>
-        <Text styles={{ fontSize: 8 }}>{KEY.split('').slice(0,2)}</Text>
-        <Text styles={{ fontSize: 8 }}>{!!KEY}</Text>
+        <Text styles={{ fontSize: 8, color: 'white' }}>{KEY.split('').slice(0,2)}</Text>
+        <Text styles={{ fontSize: 8, color: 'white' }}>{!!KEY}</Text>
       </View>
     </Screen>
   );
