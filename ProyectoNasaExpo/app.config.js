@@ -26,6 +26,8 @@ export default ({ config }) => {
     },
     updates: {
       url: 'https://u.expo.dev/2c40981d-4fe1-4d1e-a314-300a8aaa9e9a'
-    }
-  };
+    }, "plugins": [
+    "expo-build-properties"
+  ]
+  }
 };

@@ -15,6 +15,7 @@ export const ImagenDelDia = () => {
 
   const keyGuardada = useApiKey(); // si no se ha guardado una API Key se obtiene null
   const router = useRouter(); // hook para manejar la navegación
+
   useEffect(() => {
     async function cargarData() {
       try {
@@ -41,6 +42,7 @@ export const ImagenDelDia = () => {
       }
     }
     cargarData();
+  
   }, [keyGuardada]); // se ejecuta cada vez que se cambia la API Key
 
   const imagenNasa = !isLoading ? dataNasa.url : null;
@@ -78,7 +80,6 @@ export const ImagenDelDia = () => {
             <DateIcon size={17} color="white" />
             <Text style={styles.date}>{dataNasa.date ?? "-"}</Text>
           </View>
-
           <Pressable
             onPress={() => {
               router.push(`/${dataNasa.date}`);
