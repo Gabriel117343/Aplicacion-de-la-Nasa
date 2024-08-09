@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Image, Button, Pressable } from "react-native";
 import useDataNasaStore from "../../context/dataNasaStore";
-import { BlurredImageWithLoading } from "../../ui/BlurredImageWithLoading";
+import BlurredImageWithLoading from "../../ui/BlurredImageWithLoading";
 import { DateIcon } from "../shared/Icons";
 
 import { VideoDelDia } from "../VideoDelDia";
@@ -66,6 +66,7 @@ export const Descripcion = ({ date }) => {
     cambiarTextoMostrado();
   }, [mostrarTraduccion, dataNasaFiltrado]);
 
+
   return (
     <Screen>
       <View className="bg-white flex-1 items-center justify-center">
@@ -74,7 +75,7 @@ export const Descripcion = ({ date }) => {
           <Text style={{ fontSize: 15, color: "#FFFF00" }}>- HD</Text>
         </Text>
         <View style={styles.containerImg}>
-          {dataNasaFiltrado ? (
+          {dataNasaFiltrado?.url  ? (
             dataNasaFiltrado.media_type === "video" ? (
               <VideoDelDia videoUrl={dataNasaFiltrado.url} />
             ) : (
@@ -85,7 +86,7 @@ export const Descripcion = ({ date }) => {
               />
             )
           ) : (
-            <BlurredImageWithLoading />
+            <BlurredImageWithLoading startIndex={1}/>
           )}
         </View>
 

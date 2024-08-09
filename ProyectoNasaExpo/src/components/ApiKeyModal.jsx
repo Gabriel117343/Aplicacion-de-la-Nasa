@@ -6,6 +6,7 @@ import ConfettiCannon from "react-native-confetti-cannon";
 import { useRouter } from "expo-router";
 import { KeyIcon } from "../components/shared/Icons";
 import useApiKey from '../hooks/useApiKey';
+
 const ApiKeyModal = ({ visible, onDismiss, closeMenu }) => {
   const [apiKey, setApiKey] = useState("");
   const [isSaving, setIsSaving] = useState(false);
@@ -69,7 +70,7 @@ const ApiKeyModal = ({ visible, onDismiss, closeMenu }) => {
             <View style={{ alignSelf: "center" }}>
               <KeyIcon size={25} color={keyGuardada ? "green" : "red"} />
             </View>
-
+ 
             <TextInput
               style={styles.input}
               ref={inputRef}

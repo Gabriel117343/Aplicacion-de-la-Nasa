@@ -1,6 +1,6 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome'; // home
 import Fontisto from '@expo/vector-icons/Fontisto'; // fecha
-import MaterialIcons from '@expo/vector-icons/MaterialIcons'; // update, key
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'; // update, key, error
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons'; // Menu
 
 
@@ -29,5 +29,9 @@ export const CloseIcon = (props) => (
 export const KeyIcon = (props) => (
   
     <MaterialIcons name="vpn-key" {...props} />
+)
+export const ErrorIcon = (props) => (
+
+    <MaterialIcons name="error-outline" {...props} />
 )
 // tambien se podrían agregar SVG 

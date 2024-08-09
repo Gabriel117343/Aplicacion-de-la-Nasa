@@ -1,18 +1,48 @@
 // components/BlurredImageWithLoading.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StyleSheet, Image, View } from "react-native";
 import { BlurView } from "expo-blur";
 import Loading from "./Loading";
-import imagenEstrellas from "../../assets/galaxia-desenfocado.png";
+import { blurImages } from "../constants/blurImages";
 
-const BlurredImageWithLoading = () => {
+const BlurredImageWithLoading = ({ startIndex = 0, endIndex = blurImages.length }) => {
+  const [imagen, setImagen] = useState(null);
+  const [aspectRatio, setAspectRatio] = useState(null);
+
+  const randomImageStatic = () => {
+    // Selecciona una imagen aleatoria entre las importadas
+    const imgMostrar = blurImages.slice(startIndex, endIndex);
+
+    // en caso de que no se haya pasado un índice de inicio se selecciona una imagen aleatoria
+    const random = Math.floor(Math.random() * imgMostrar.length) + startIndex;
+
+    return { image: blurImages[random], index: random };
+  };
+  useEffect(() => {
+    const getImagen = () => {
+      const { image, index } = randomImageStatic();
+ 
+      if (index === 0) {
+        setAspectRatio("16/13");
+      } else if (index >= 1 && index <= 2) {
+        setAspectRatio("16/30");
+      } else {
+        setAspectRatio("16/15");
+      }
+      setImagen(image);
+    };
+    getImagen();
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.fondoCarga}>
         <Loading />
       </View>
-     
-      <Image source={imagenEstrellas} style={styles.image} />
+      {imagen && (
+        <Image source={imagen} style={[styles.image, { aspectRatio: aspectRatio }]} />
+      )}
+
       <BlurView
         tint="systemThinMaterialDark"
         intensity={40}
@@ -41,7 +71,6 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    objectFit: "cover",
-    aspectRatio: "1/1",
+    objectFit: "contain",
   },
 });

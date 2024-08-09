@@ -6,7 +6,7 @@ import { VideoDelDia } from "./VideoDelDia";
 import BlurredImageWithLoading from "../ui/BlurredImageWithLoading";
 import { DateIcon } from "../components/shared/Icons";
 import useApiKey from "../hooks/useApiKey";
-
+import * as Burnt from "burnt";
 export const ImagenDelDia = () => {
   // solo se utiliza para presentación por lo que no se guarda en el estado global
   const [dataNasa, setDataNasa] = useState([]);
@@ -66,7 +66,7 @@ export const ImagenDelDia = () => {
             )
           ) : (
             <>
-              <BlurredImageWithLoading />
+              <BlurredImageWithLoading endIndex={2}/>
             </>
           )}
         </View>
@@ -80,9 +80,11 @@ export const ImagenDelDia = () => {
             <DateIcon size={17} color="white" />
             <Text style={styles.date}>{dataNasa.date ?? "-"}</Text>
           </View>
+         
           <Pressable
             onPress={() => {
-              router.push(`/${dataNasa.date}`);
+              router.push(`${dataNasa.date}`) // se navega a la ruta con la fecha de la imagen
+
             }}
             disabled={isLoading} // se deshabilita el botón si isLoading es true
             style={({ pressed }) => [
