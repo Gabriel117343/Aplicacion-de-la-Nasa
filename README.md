@@ -44,6 +44,6 @@
 > Intefaz
 <div style="display: flex; justify-content: space-around; align-items: center; gap: 50px;">
   <img src="https://github.com/user-attachments/assets/160727af-f8b9-4502-a821-ad6ce3fad233" alt="NASA Image 1" width="25%" />
-  <img src="https://github.com/user-attachments/assets/c3717147-ff37-49a5-be46-e74170669c74" alt="NASA Image 2" width="25%" />
+  <img src="https://github.com/user-attachments/assets/69846f02-802f-4114-83ad-42a777a69484" alt="NASA Image 2" width="25%" />
   <img src="https://github.com/user-attachments/assets/a133c2ff-bb58-4db3-aa75-d60eb067cdf7" alt="NASA Image 3" width="25%" />
 </div>
