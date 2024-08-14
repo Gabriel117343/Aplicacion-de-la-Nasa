@@ -42,7 +42,6 @@ export const ImagenDelDia = () => {
       }
     }
     cargarData();
-  
   }, [keyGuardada]); // se ejecuta cada vez que se cambia la API Key
 
   const imagenNasa = !isLoading ? dataNasa.url : null;
@@ -66,7 +65,7 @@ export const ImagenDelDia = () => {
             )
           ) : (
             <>
-              <BlurredImageWithLoading endIndex={2}/>
+              <BlurredImageWithLoading endIndex={2} />
             </>
           )}
         </View>
@@ -80,11 +79,10 @@ export const ImagenDelDia = () => {
             <DateIcon size={17} color="white" />
             <Text style={styles.date}>{dataNasa.date ?? "-"}</Text>
           </View>
-         
+
           <Pressable
             onPress={() => {
-              router.push(`${dataNasa.date}`) // se navega a la ruta con la fecha de la imagen
-
+              router.push(`${dataNasa.date}`); // se navega a la ruta con la fecha de la imagen
             }}
             disabled={isLoading} // se deshabilita el botón si isLoading es true
             style={({ pressed }) => [
@@ -97,19 +95,17 @@ export const ImagenDelDia = () => {
               styles.wrapperCustom,
             ]}
           >
-            {({ pressed }) => (
-              <Text
-                style={{
-                  color: "white",
-                  textAlign: "center",
-                  fontWeight: "bold",
+            <Text
+              style={{
+                color: "white",
+                textAlign: "center",
+                fontWeight: "bold",
 
-                  fontSize: 14,
-                }}
-              >
-                {pressed ? "Soltar" : "Ver"}
-              </Text>
-            )}
+                fontSize: 14,
+              }}
+            >
+              Ver
+            </Text>
           </Pressable>
         </View>
       </View>

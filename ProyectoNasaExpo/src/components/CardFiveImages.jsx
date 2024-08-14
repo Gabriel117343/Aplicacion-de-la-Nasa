@@ -1,24 +1,14 @@
-
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  Animated
-} from "react-native";
-import React, { useEffect, useRef } from 'react'
-import { useRouter } from 'expo-router'
-import { UpdateIcon } from '../components/shared/Icons'
+import { StyleSheet, Text, View, Pressable, Animated } from "react-native";
+import React, { useEffect, useRef } from "react";
+import { useRouter } from "expo-router";
+import { UpdateIcon } from "../components/shared/Icons";
 
 export const CardFiveImages = ({ data }) => {
-
-  const router = useRouter() // hook para manejar la navegación
+  const router = useRouter(); // hook para manejar la navegación
 
   return (
     <View style={styles.informacion}>
-      <View
-        style={[styles.fondoContainer, StyleSheet.absoluteFillObject]}
-      />
+      <View style={[styles.fondoContainer, StyleSheet.absoluteFillObject]} />
       <Text style={styles.title}>{data.title}</Text>
       <View
         style={{
@@ -28,10 +18,9 @@ export const CardFiveImages = ({ data }) => {
         }}
       >
         <View style={{ flexDirection: "row", gap: 4 }}>
-           
-            <UpdateIcon size={19} color="white" style={{ opacity: 0.8 }}/>
-            <Text style={styles.date}>{data.date ?? "-"}</Text>
-          </View>
+          <UpdateIcon size={19} color="white" style={{ opacity: 0.8 }} />
+          <Text style={styles.date}>{data.date ?? "-"}</Text>
+        </View>
         <Pressable
           onPress={() => router.push(`/${data.date}`)}
           style={({ pressed }) => [
@@ -44,16 +33,14 @@ export const CardFiveImages = ({ data }) => {
             styles.wrapperCustom,
           ]}
         >
-          {({ pressed }) => (
-            <Text style={{ color: "white", textAlign: "center", fontSize: 14 }}>
-              {pressed ? "Soltar" : "Ver"}
-            </Text>
-          )}
+          <Text style={{ color: "white", textAlign: "center", fontSize: 14 }}>
+            Ver
+          </Text>
         </Pressable>
       </View>
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   title: {
@@ -80,22 +67,22 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 16,
   },
-})
+});
 
-export const AnimatedCardFiveImages = ({ data, index }) =>{
-  const opacity = useRef(new Animated.Value(0)).current
+export const AnimatedCardFiveImages = ({ data, index }) => {
+  const opacity = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.timing(opacity, {
       toValue: 1,
       duration: 500,
       delay: index * 250,
-      useNativeDriver: true
-    }).start()
-  }, [opacity, index])
+      useNativeDriver: true,
+    }).start();
+  }, [opacity, index]);
   return (
     <Animated.View style={{ opacity }}>
       <CardFiveImages data={data} />
     </Animated.View>
-  )
-} 
+  );
+};

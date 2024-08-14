@@ -8,13 +8,14 @@ import { LastFiveImages } from "./LastFiveImages";
 import { Cometa } from "./shared/Cometa";
 import { Satelite } from "./shared/Satelite";
 
-
+import { toast } from 'react-native-toast-lite'
 export default function Main() {
 
   const image = {
     uri: "https://www.ucf.edu/wp-content/blogs.dir/20/files/2021/08/UCF-Space-Exploration.jpg",
   };
-
+   
+  
   return (
     <View style={[styles.container]}>
       <LinearGradient
@@ -26,6 +27,7 @@ export default function Main() {
         <ImageBackground source={image} style={styles.fondoImg} />
         <Satelite />
         <Cometa />
+
         <View style={styles.overlayContainer}>
           <BlurView intensity={30} style={styles.blurView}>
             <Text
