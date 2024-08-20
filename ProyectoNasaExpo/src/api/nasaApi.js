@@ -8,7 +8,7 @@ const KEY =
   process.env.NASA_API_KEY;
 
 // Creación de una instancia de axios para acceder a la API de la NASA
-const nasaAPI = axios.create({
+export const nasaAPI = axios.create({
   baseURL: "https://api.nasa.gov/planetary/apod",
   timeout: 10000,
 });

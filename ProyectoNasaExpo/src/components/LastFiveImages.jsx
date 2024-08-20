@@ -44,27 +44,34 @@ export const LastFiveImages = () => {
   }, [keyGuardada]); // se ejecuta cada vez que se cambia la API Key
 
   return (
-    <View style={styles.container}>
-      {isLoading ? (
-        <Text style={{ color: "white", textAlign: "center" }}>Cargando...</Text>
-      ) : (
-        <FlatList
-          data={dataNasa.filter((item) => item.date !== todaysDate)}
-          keyExtractor={(item) => item.date}
-          renderItem={({ item, index }) => (
-            <AnimatedCardFiveImages data={item} index={index} />
-          )}
-        />
-      )}
+    <View style={styles.parentContainer}>
+      <View style={styles.container}>
+        {isLoading ? (
+          <Text style={{ color: "white", textAlign: "center" }}>Cargando...</Text>
+        ) : (
+          <FlatList
+            data={dataNasa.filter((item) => item.date !== todaysDate)}
+            keyExtractor={(item) => item.date}
+            renderItem={({ item, index }) => (
+              <AnimatedCardFiveImages data={item} index={index} />
+            )}
+          />
+        )}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  parentContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
-    height: "100%",
+    width: 350,
     flex: 1,
     borderRadius: 16,
-    overflow: "hidden",
+    overflow: 'hidden',
   },
 });

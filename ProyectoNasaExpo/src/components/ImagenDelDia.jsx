@@ -6,7 +6,7 @@ import { VideoDelDia } from "./VideoDelDia";
 import BlurredImageWithLoading from "../ui/BlurredImageWithLoading";
 import { DateIcon } from "../components/shared/Icons";
 import useApiKey from "../hooks/useApiKey";
-import * as Burnt from "burnt";
+import { toast } from 'react-native-toast-lite'
 export const ImagenDelDia = () => {
   // solo se utiliza para presentación por lo que no se guarda en el estado global
   const [dataNasa, setDataNasa] = useState([]);
@@ -17,6 +17,7 @@ export const ImagenDelDia = () => {
   const router = useRouter(); // hook para manejar la navegación
 
   useEffect(() => {
+    if (dataNasa.length > 0) return; // si ya se cargó la data no se vuelve a cargar
     async function cargarData() {
       try {
         const data = await getAllImages({
@@ -29,6 +30,7 @@ export const ImagenDelDia = () => {
           setIsLoading(false);
         }
       } catch (error) {
+        toast.error('Error al cargar la información de la NASA', { title: 'Error' })
         if (error.response) {
           throw new Error(
             error?.response?.data?.error ?? "Error en la petición"
@@ -42,8 +44,7 @@ export const ImagenDelDia = () => {
       }
     }
     cargarData();
-  }, [keyGuardada]); // se ejecuta cada vez que se cambia la API Key
-
+  }, []);
   const imagenNasa = !isLoading ? dataNasa.url : null;
   console.log(imagenNasa);
 
@@ -119,6 +120,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     zIndex: 1,
     position: "relative",
+ 
   },
   fondoContainer: {
     flex: 1,

@@ -6,7 +6,8 @@ import ConfettiCannon from "react-native-confetti-cannon";
 import { useRouter } from "expo-router";
 import { KeyIcon } from "../components/shared/Icons";
 import useApiKey from '../hooks/useApiKey';
-
+import { usePing } from '../hooks/usePing'
+import { toast } from 'react-native-toast-lite'
 const ApiKeyModal = ({ visible, onDismiss, closeMenu }) => {
   const [apiKey, setApiKey] = useState("");
   const [isSaving, setIsSaving] = useState(false);
@@ -16,8 +17,16 @@ const ApiKeyModal = ({ visible, onDismiss, closeMenu }) => {
   const router = useRouter(); // Hook de navegación
 
   const keyGuardada = useApiKey();
-
+  const pingResult = usePing();
   const saveApiKey = async () => {
+    toast.loading("Guardando...", { id: 'loading', toastStyle: 'secondary' } )
+    const { success, message } = await pingResult.validateKeyNasa(apiKey).finally(() => onDismiss())
+    if (success) {
+      toast.success(message, { title: 'Exito!', id: 'loading' })
+    } else {
+      toast.error(message, { id: 'loading' })
+      return
+    }
     setIsSaving(true);
     try {
       // guarda en el almacenamiento local del dispositivo
@@ -26,17 +35,17 @@ const ApiKeyModal = ({ visible, onDismiss, closeMenu }) => {
       confettiRef.current.start();
     } catch (e) {
       console.error(e);
-      throw new Error("No se pudo guardar la API Key");
+      toast.error("No se pudo guardar la API Key")
     } finally {
       inputRef.current.clear();
       setTimeout(() => {
         closeMenu();
-        onDismiss();
         router.push("/"); // Recargar la página actual
       }, 2000);
     }
   };
   const reestablecerApiKey = async () => {
+    
     setIsSaving(true);
     try {
       await AsyncStorage.removeItem("NASA_API_KEY");
