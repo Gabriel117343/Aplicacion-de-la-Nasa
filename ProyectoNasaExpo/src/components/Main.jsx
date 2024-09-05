@@ -7,7 +7,7 @@ import { LastFiveImages } from "./LastFiveImages";
 
 import { Cometa } from "./shared/Cometa";
 import { Satelite } from "./shared/Satelite";
-import { toast } from "react-native-toast-factory";
+import { toast } from "react-native-toast-lite";
 
 
 export default function Main() {
@@ -19,16 +19,19 @@ export default function Main() {
   //     animationType: "fade",
   //     id: "cargaDatos",
   //     position: 'bottom', // estado persistente si cambia el loading a success
-  //     toastStyle: "dark",
+  //     animationInDuration: 1000,
+  //     duration: 3000,
+
+  //     toastStyle: "secondary",
   //     animationOutDuration: 3000,
-  //     styles: { bottom: 200, left: 200, progresscolor: 'white'}
+  //     styles: { bottom: 200, left: 200, progresscolor: 'white', opacity: 0.9 }
 
     
   //   });
   //   toast.success("¡Gracias por visitarnosss!", { toastStyle: 'primary', icon : '🚀', position: 'center', duration: 4000})
   //   setTimeout(() => {
-  //     toast.success('Se ha enviado correctamente!', {title: 'Exito!', id: 'cargaDatos', animationType: "bounce", toastStyle: "secondary", inheritStyles: false, border: false, styles: {}})
-  //   }, 2000) 
+  //     toast.success('Se ha enviado correctamente!', {title: 'Exito!', id: 'cargaDatos', animationType: "fade", animationDuration: 5000, toastStyle: "secondary", inheritStyles: false, border: false, styles: { opacity: 0.9 }})
+  //   }, 3000) 
     
   // };
 
@@ -40,10 +43,11 @@ export default function Main() {
         end={{ x: 0, y: 1 }}
         style={styles.containerBackground}
       >
+  
         <ImageBackground source={image} style={styles.fondoImg} />
         <Satelite />
         <Cometa />
-
+        {/* <Button title="Enviar Datos" onPress={enviarDatos} /> */}
         <View style={styles.overlayContainer}>
           <BlurView intensity={30} style={styles.blurView}>
             <Text

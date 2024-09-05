@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context"; // utilidad 
 import { Provider as PaperProvider } from "react-native-paper"; // para renderizar la modal
 // import { StatusBar } from 'expo-status-bar'; // para renderizar la barra de estado
 
-import { Toaster } from "react-native-toast-factory";
+import { Toaster } from "react-native-toast-lite";
 // Documentación > https://www.npmjs.com/package/react-native-toast-message
 export default function Layout() {
   const insets = useSafeAreaInsets(); // margenes seguros del dispositivo
