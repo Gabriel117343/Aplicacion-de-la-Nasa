@@ -1,10 +1,6 @@
 import { View, Text, StyleSheet, Image } from "react-native";
 import { Screen } from "../descripcion/Screen";
 
-import Constants from 'expo-constants';
-
-
-
 export default function InformacionNasa() {
   return (
     <Screen>
@@ -38,7 +34,6 @@ export default function InformacionNasa() {
           La NASA también ha sido pionera en el desarrollo de tecnologías
           espaciales, como los cohetes Saturno V y el...
         </Text>
-  
       </View>
     </Screen>
   );

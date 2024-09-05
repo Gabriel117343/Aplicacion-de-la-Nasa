@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Text, View, StyleSheet, Image, Button, Pressable } from "react-native";
 import useDataNasaStore from "../../context/dataNasaStore";
 import BlurredImageWithLoading from "../../ui/BlurredImageWithLoading";
@@ -17,12 +17,17 @@ export const Descripcion = ({ date }) => {
 
   const [loadingTraduccion, setLoadingTraduccion] = useState(false);
   const [mostrarTraduccion, setMostrarTraduccion] = useState(false);
+
+ 
   const separarEnParrafos = (texto) => {
 
     if (!texto) return;
+
+
     // Divide el texto en párrafos
     const newParagraphs = texto?.split(".");
     newParagraphs.pop(); // se elimina el último elemento resultante de split, que es un string vacío
+
     setParagraphs(newParagraphs);
   };
 
@@ -114,12 +119,14 @@ export const Descripcion = ({ date }) => {
             Traducir
           </Text>
         </Pressable>
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 20, display: 'flex' }}>
           {paragraphs.map((paragraph, index) => (
+           
             <Text key={index} style={styles.paragraph}>
               {paragraph}.
             </Text>
           ))}
+
         </View>
       </View>
     </Screen>

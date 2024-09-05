@@ -6,7 +6,7 @@ import { VideoDelDia } from "./VideoDelDia";
 import BlurredImageWithLoading from "../ui/BlurredImageWithLoading";
 import { DateIcon } from "../components/shared/Icons";
 import useApiKey from "../hooks/useApiKey";
-import { toast } from 'react-native-toast-lite'
+import { toast } from 'react-native-toast-factory'
 export const ImagenDelDia = () => {
   // solo se utiliza para presentación por lo que no se guarda en el estado global
   const [dataNasa, setDataNasa] = useState([]);

@@ -7,7 +7,7 @@ import { useRouter } from "expo-router";
 import { KeyIcon } from "../components/shared/Icons";
 import useApiKey from '../hooks/useApiKey';
 import { usePing } from '../hooks/usePing'
-import { toast } from 'react-native-toast-lite'
+import { toast } from 'react-native-toast-factory'
 const ApiKeyModal = ({ visible, onDismiss, closeMenu }) => {
   const [apiKey, setApiKey] = useState("");
   const [isSaving, setIsSaving] = useState(false);
